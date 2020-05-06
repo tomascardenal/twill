@@ -12,7 +12,7 @@
     <fieldset class="login__fieldset">
         <label class="login__label" for="password">{{ twillTrans('twill::lang.auth.password') }}</label>
         <a href="{{ route('admin.password.reset.link') }}" class="login__help f--small" tabindex="5"><span>{{ twillTrans('twill::lang.auth.forgot-password') }}</span></a>
-        <input type="password" name="password" id="password" class="login__input" required tabindex="2" />
+        <input type="password" autocomplete="off" name="password" id="password" class="login__input" required tabindex="2" />
     </fieldset>
 
     <input class="login__button" type="submit" value="{{ twillTrans('twill::lang.auth.login') }}" tabindex="3">
