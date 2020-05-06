@@ -101,7 +101,7 @@ class UserController extends ModuleController
         $this->indexColumns['name']['title'] = twillTrans('twill::lang.user-management.name');
         $this->indexColumns['role_value']['title'] = twillTrans('twill::lang.user-management.role');
         if(config('twill.enabled.users-image')){
-            $this->indexColumns['image']['title'] = twillTrans('twill::lang.user-management.image');
+            $this->indexColumns['image']['title'] = twillTrans('twill::lang.user-management.user-image');
         }
     }
 
