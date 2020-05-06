@@ -32,6 +32,10 @@
     },
     mixins: [draggableMixin],
     props: {
+      addLabelValue: {
+        type: String,
+        default: this.$trans('fields.browser.add-label', 'Add')
+      },
       name: {
         type: String,
         required: true
@@ -75,7 +79,7 @@
         return this.max - this.items.length
       },
       addLabel: function () {
-        return this.$trans('fields.browser.add-label', 'Add') + ' ' + this.itemLabel
+        return this.addLabelValue + ' ' + this.itemLabel
       },
       browserTitle: function () {
         return this.modalTitle !== '' ? this.modalTitle : this.addLabel

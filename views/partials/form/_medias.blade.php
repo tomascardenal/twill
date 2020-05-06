@@ -1,4 +1,5 @@
 @php
+    $type = $type ?? 'image';
     $max = $max ?? 1;
     $required = $required ?? false;
     $note = $note ?? '';
@@ -18,6 +19,7 @@
     <a17-locale
         type="a17-mediafield-translated"
         :attributes="{
+            type: '{{ $type }}',
             label: '{{ $label }}',
             cropContext: '{{ $name }}',
             max: {{ $max }},
@@ -47,6 +49,7 @@
     <a17-inputframe label="{{ $label }}" name="medias.{{ $name }}" @if ($required) :required="true" @endif @if ($fieldNote) note="{{ $fieldNote }}" @endif>
         @if($multiple) <a17-slideshow @else <a17-mediafield @endif
             @include('twill::partials.form.utils._field_name')
+            type="{{ $type }}"
             crop-context="{{ $name }}"
             :width-min="{{ $widthMin }}"
             :height-min="{{ $heightMin }}"

@@ -21,7 +21,7 @@
         @foreach(config('twill.oauth.providers', []) as $index => $provider)
             <a href="{!! route('admin.login.redirect', $provider) !!}" class="login__socialite login__{{$provider}}" tabindex="{{ 4 + $index }}">
                 @includeIf('twill::auth.icons.' . $provider)
-                <span>Sign in with {{ ucfirst($provider)}}</span>
+                <span>{{ twillTrans('twill::lang.auth.sing-with') }} {{ ucfirst($provider)}}</span>
             </a>
         @endforeach
     @endif

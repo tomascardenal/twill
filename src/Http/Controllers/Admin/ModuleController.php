@@ -362,7 +362,7 @@ abstract class ModuleController extends Controller
         Session::put($this->moduleName . '_retain', true);
 
         if ($this->getIndexOption('editInModal')) {
-            return $this->respondWithSuccess('Content saved. All good!');
+            return $this->respondWithSuccess(twillTrans('twill::lang.module.content-saved'));
         }
 
         if ($parentModuleId) {
@@ -467,7 +467,7 @@ abstract class ModuleController extends Controller
                         ['openCreate' => true]
                     ));
                 } elseif ($input['cmsSaveType'] === 'restore') {
-                    Session::flash('status', "Revision restored.");
+                    Session::flash('status', twillTrans('twill::lang.module.revision-restored'));
 
                     return $this->respondWithRedirect(moduleRoute(
                         $this->moduleName,
@@ -480,13 +480,13 @@ abstract class ModuleController extends Controller
 
             if ($this->moduleHas('revisions')) {
                 return Response::json([
-                    'message' => 'Content saved. All good!',
+                    'message' => twillTrans('twill::lang.module.content-saved'),
                     'variant' => FlashLevel::SUCCESS,
                     'revisions' => $item->revisionsArray(),
                 ]);
             }
 
-            return $this->respondWithSuccess('Content saved. All good!');
+            return $this->respondWithSuccess(twillTrans('twill::lang.module.content-saved'));
         }
     }
 
@@ -543,9 +543,17 @@ abstract class ModuleController extends Controller
         $revision = $item->revisions()->where('id', $this->request->get('revisionId'))->first();
         $date = $revision->created_at->toDayDateTimeString();
 
-        Session::flash('restoreMessage', "You are currently editing an older revision of this content (saved by $revision->byUser on $date). Make changes if needed and click restore to save a new revision.");
+        Session::flash('restoreMessage', $this->getRestoreMessage($revision, $date));
 
         return View::make($view, $this->form($id, $item));
+    }
+
+    public function getRestoreMessage($revision, $date)
+    {
+        $olderRev = twillTrans('twill::lang.module.older-rev');
+        $on = twillTrans('twill::lang.module.on');
+        $makeChanges = twillTrans('twill::lang.module.make-changes');
+        return $olderRev . "" . $revision->byUser . "" . $on . "" . $date . "" . $makeChanges;
     }
 
     /**
@@ -560,13 +568,13 @@ abstract class ModuleController extends Controller
                 activity()->performedOn(
                     $this->repository->getById($this->request->get('id'))
                 )->log(
-                    ($this->request->get('active') ? 'un' : '') . 'published'
+                    ($this->request->get('active') ? twillTrans('twill::lang.module.un') : '') . twillTrans('twill::lang.module.published')
                 );
 
                 $this->fireEvent();
 
                 return $this->respondWithSuccess(
-                    $this->modelTitle . ' ' . ($this->request->get('active') ? 'un' : '') . 'published!'
+                    $this->modelTitle . ' ' . ($this->request->get('active') ? twillTrans('twill::lang.module.un') : '') . twillTrans('twill::lang.module.published').'!'
                 );
             }
         } catch (\Exception $e) {
@@ -574,7 +582,7 @@ abstract class ModuleController extends Controller
         }
 
         return $this->respondWithError(
-            $this->modelTitle . ' was not published. Something wrong happened!'
+            $this->modelTitle . twillTrans('twill::lang.module.not-published')
         );
     }
 
@@ -590,7 +598,7 @@ abstract class ModuleController extends Controller
                 $this->fireEvent();
 
                 return $this->respondWithSuccess(
-                    $this->modelTitle . ' items ' . ($this->request->get('publish') ? '' : 'un') . 'published!'
+                    $this->modelTitle . twillTrans('twill::lang.module.items') . ($this->request->get('publish') ? '' : twillTrans('twill::lang.module.un')) . twillTrans('twill::lang.module.published').'!'
                 );
             }
         } catch (\Exception $e) {
@@ -598,7 +606,7 @@ abstract class ModuleController extends Controller
         }
 
         return $this->respondWithError(
-            $this->modelTitle . ' items were not published. Something wrong happened!'
+            $this->modelTitle . twillTrans('twill::lang.module.items-not-published')
         );
     }
 
@@ -616,7 +624,7 @@ abstract class ModuleController extends Controller
             activity()->performedOn($item)->log('duplicated');
 
             return Response::json([
-                'message' => $this->modelTitle . ' duplicated with Success!',
+                'message' => $this->modelTitle . twillTrans('twill::lang.module.duplicated-success'),
                 'variant' => FlashLevel::SUCCESS,
                 'redirect' => moduleRoute(
                     $this->moduleName,
@@ -627,7 +635,7 @@ abstract class ModuleController extends Controller
             ]);
         }
 
-        return $this->respondWithError($this->modelTitle . ' was not duplicated. Something wrong happened!');
+        return $this->respondWithError($this->modelTitle . twillTrans('twill::lang.module.not-duplicated'));
     }
 
     /**
@@ -641,10 +649,10 @@ abstract class ModuleController extends Controller
         if ($this->repository->delete($submoduleId ?? $id)) {
             $this->fireEvent();
             activity()->performedOn($item)->log('deleted');
-            return $this->respondWithSuccess($this->modelTitle . ' moved to trash!');
+            return $this->respondWithSuccess($this->modelTitle . twillTrans('twill::lang.module.moved-trash'));
         }
 
-        return $this->respondWithError($this->modelTitle . ' was not moved to trash. Something wrong happened!');
+        return $this->respondWithError($this->modelTitle . twillTrans('twill::lang.module.not-moved-trash'));
     }
 
     /**

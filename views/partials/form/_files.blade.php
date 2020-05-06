@@ -1,4 +1,5 @@
 @php
+    $type = $type ?? 'file';
     $max = $max ?? 1;
     $itemLabel = $itemLabel ?? strtolower($label);
     $note = $note ?? 'Add' . ($max > 1 ? " up to $max $itemLabel" : ' one ' . Str::singular($itemLabel));
@@ -9,6 +10,7 @@
 <a17-locale
     type="a17-filefield"
     :attributes="{
+        type: '{{ $type }}',
         label: '{{ $label }}',
         itemLabel: '{{ $itemLabel }}',
         @include('twill::partials.form.utils._field_name', ['asAttributes' => true])

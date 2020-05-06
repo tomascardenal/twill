@@ -125,14 +125,14 @@
             </a17-modal-create>
         @endif
 
-        <a17-dialog ref="warningDeleteRow" modal-title="Delete item" confirm-label="Delete">
-            <p class="modal--tiny-title"><strong>Move to trash</strong></p>
-            <p>The item won't be deleted but moved to trash.</p>
+        <a17-dialog ref="warningDeleteRow" modal-title="{{ twillTrans('twill::lang.listing.actions.delete-item') }}" confirm-label="{{ twillTrans('twill::lang.listing.actions.delete') }}">
+            <p class="modal--tiny-title"><strong>{{ twillTrans('twill::lang.listing.actions.to-trash') }}</strong></p>
+            <p>{{ twillTrans('twill::lang.listing.actions.info-trash') }}</p>
         </a17-dialog>
 
-        <a17-dialog ref="warningDestroyRow" modal-title="Destroy item" confirm-label="Destroy">
-            <p class="modal--tiny-title"><strong>Destroy permanently</strong></p>
-            <p>The item won't be able to be restored anymore.</p>
+        <a17-dialog ref="warningDestroyRow" modal-title="{{ twillTrans('twill::lang.listing.actions.destroy-item') }}" confirm-label="{{ twillTrans('twill::lang.listing.actions.destroy') }}">
+            <p class="modal--tiny-title"><strong>{{ twillTrans('twill::lang.listing.actions.destroy-permanently') }}</strong></p>
+            <p>{{ twillTrans('twill::lang.listing.actions.info-destroy') }}</p>
         </a17-dialog>
     </div>
 @stop

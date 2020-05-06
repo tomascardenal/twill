@@ -50,7 +50,7 @@
               <a17-uploader v-if="authorized" @loaded="addMedia" @clear="clearSelectedMedias"
                             :type="currentTypeObject"/>
               <div class="medialibrary__list-items">
-                <a17-itemlist v-if="type === 'file'" :items="renderedMediaItems" :selected-items="selectedMedias"
+                <a17-itemlist v-if="type && type.startsWith('file')" :items="renderedMediaItems" :selected-items="selectedMedias"
                               :used-items="usedMedias" @change="updateSelectedMedias"
                               @shiftChange="updateSelectedMedias"/>
                 <a17-mediagrid v-else :items="renderedMediaItems" :selected-items="selectedMedias" :used-items="usedMedias"
@@ -116,6 +116,12 @@
           return this.$trans('media-library.insert', 'Insert')
         }
       },
+      btnLabelType: {
+        type: Object,
+        default () {
+          return undefined
+        }
+      },
       initialPage: {
         type: Number,
         default: 1
@@ -179,8 +185,12 @@
         return this.modalTitlePrefix
       },
       btnLabel: function () {
-        if (this.indexToReplace > -1) return this.btnLabelUpdate + ' ' + this.type
-        return (this.selectedMedias.length > 1 ? this.btnLabelMulti + ' ' + this.type + 's' : this.btnLabelSingle + ' ' + this.type)
+        let labelType = this.type + (this.selectedMedias.length > 1 ? 's' : '')
+        if (this.btnLabelType && this.btnLabelType[labelType] !== undefined) {
+          labelType = this.btnLabelType[labelType]
+        }
+        if (this.indexToReplace > -1) return this.btnLabelUpdate + ' ' + labelType
+        return (this.selectedMedias.length > 1 ? this.btnLabelMulti + ' ' + labelType : this.btnLabelSingle + ' ' + labelType)
       },
       usedMedias: function () {
         return this.selected[this.connector] || []
