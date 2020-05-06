@@ -3,7 +3,7 @@ import { BROWSER } from '../mutations'
 
 const state = {
   connector: null,
-  title: 'Attach related resources',
+  title: window.STORE.browser.title || 'Attach related resources',
   endpoint: '',
   endpointName: '',
   endpoints: [],
