@@ -95,6 +95,29 @@ class UserController extends ModuleController
     protected $fieldsPermissions = [
         'role' => 'manage-users',
     ];
+    
+    function mapStrings($key){
+        switch($key){
+            case 'name':
+                return __('users.name') == 'users.name' ? 'Name' : __('users.name');
+            case 'role':
+                return __('users.role') == 'users.role' ? 'Role' : __('users.role');
+            case 'image':
+                return __('users.image') == 'users.image' ? 'Image' : __('users.image');
+            case 'enabled':
+                return __('users.enabled') == 'users.enabled' ? 'Enabled' : __('users.enabled');
+            case 'disabled':
+                return __('users.disabled') == 'users.disabled' ? 'Disabled' : __('users.disabled');
+        }
+    }
+    
+    function redoIndexCols(){
+        $this->indexColumns['name']['title'] = $this->mapStrings('name');
+        $this->indexColumns['role_value']['title'] = $this->mapStrings('role');
+        if(config('twill.enabled.users-image')){
+            $this->indexColumns['image']['title'] = $this->mapStrings('image');
+        }
+    }
 
     public function __construct(Application $app, Request $request, AuthFactory $authFactory, Config $config)
     {
@@ -122,6 +145,7 @@ class UserController extends ModuleController
                 ],
             ] + $this->indexColumns;
         }
+        $this->redoIndexCols();
     }
 
     /**
@@ -130,6 +154,8 @@ class UserController extends ModuleController
      */
     protected function indexData($request)
     {
+        $enabled = $this->mapStrings('enabled');
+        $disabled = $this->mapStrings('disabled');
         return [
             'defaultFilterSlug' => 'published',
             'create' => $this->getIndexOption('create') && $this->authFactory->guard('twill_users')->user()->can('manage-users'),
@@ -140,7 +166,7 @@ class UserController extends ModuleController
                     'module' => true,
                 ],
             ],
-            'customPublishedLabel' => 'Enabled',
+            'customPublishedLabel' => '$enabled',
             'customDraftLabel' => 'Disabled',
         ];
     }
