@@ -128,6 +128,11 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        //After login event for tomascardenal/twill fork
+        $result = event('twill.user.afterlogin', $user, true);
+        if ($result) { //If it captured the event, return the result
+            return $result;
+        }
         return $this->afterAuthentication($request, $user);
     }
 
