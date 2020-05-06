@@ -95,6 +95,15 @@ class UserController extends ModuleController
     protected $fieldsPermissions = [
         'role' => 'manage-users',
     ];
+    
+    
+    function redoIndexCols(){
+        $this->indexColumns['name']['title'] = twillTrans('twill::lang.user-management.name');
+        $this->indexColumns['role_value']['title'] = twillTrans('twill::lang.user-management.role');
+        if(config('twill.enabled.users-image')){
+            $this->indexColumns['image']['title'] = twillTrans('twill::lang.user-management.user-image');
+        }
+    }
 
     public function __construct(Application $app, Request $request, AuthFactory $authFactory, Config $config)
     {
@@ -122,6 +131,7 @@ class UserController extends ModuleController
                 ],
             ] + $this->indexColumns;
         }
+        $this->redoIndexCols();
     }
 
     /**
@@ -140,8 +150,8 @@ class UserController extends ModuleController
                     'module' => true,
                 ],
             ],
-            'customPublishedLabel' => 'Enabled',
-            'customDraftLabel' => 'Disabled',
+            'customPublishedLabel' => twillTrans('twill::lang.user-management.enabled'),
+            'customDraftLabel' => twillTrans('twill::lang.user-management.disabled'),
         ];
     }
 
