@@ -11,7 +11,7 @@
     <div slot="dropdown__content">
       <a v-if="row.hasOwnProperty('permalink')"
          :href="row['permalink']"
-         target="_blank">View permalink</a>
+         target="_blank">{{ $trans('listing.dropdown.view-permalink', 'View permalink') }}</a>
       <a v-if="row.hasOwnProperty('edit') && !row.hasOwnProperty('deleted') && row['edit']"
          :href="editUrl"
          @click="preventEditInPlace($event)">{{ $trans('listing.dropdown.edit', 'Edit') }}</a>

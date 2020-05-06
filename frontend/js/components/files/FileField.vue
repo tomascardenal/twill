@@ -32,6 +32,10 @@
     },
     mixins: [draggableMixin, mediaLibraryMixin, localeMixin, inputframeMixin],
     props: {
+      addLabelValue: {
+        type: String,
+        default: this.$trans('fields.files.add-label', 'Add')
+      },
       type: {
         type: String,
         default: 'file'
@@ -104,7 +108,7 @@
         }
       },
       addLabel: function () {
-        return this.$trans('fields.files.add-label', 'Add') + ' ' + this.itemLabel
+        return this.addLabelValue + this.itemLabel
       },
       ...mapState({
         selectedFiles: state => state.mediaLibrary.selected

@@ -15,6 +15,10 @@ const getFieldIndex = (stateKey, field) => {
 
 const state = {
   /**
+   * Error message for failed submission
+   */
+  failedSubmission: window.STORE.form.failedsubmission || 'Your submission could not be validated, please fix and retry',
+  /**
    * Loading state of the form when submitting
    * @type {Boolean}
    */
@@ -231,7 +235,7 @@ const actions = {
       }, function (errorResponse) {
         commit(FORM.UPDATE_FORM_LOADING, false)
         commit(FORM.SET_FORM_ERRORS, errorResponse.response.data)
-        commit(NOTIFICATION.SET_NOTIF, { message: 'Your submission could not be validated, please fix and retry', variant: 'error' })
+        commit(NOTIFICATION.SET_NOTIF, { message: state.failedSubmission, variant: 'error' })
         reject(errorResponse)
       })
     })
@@ -260,7 +264,7 @@ const actions = {
       }, function (errorResponse) {
         commit(FORM.UPDATE_FORM_LOADING, false)
         commit(FORM.SET_FORM_ERRORS, errorResponse.response.data)
-        commit(NOTIFICATION.SET_NOTIF, { message: 'Your submission could not be validated, please fix and retry', variant: 'error' })
+        commit(NOTIFICATION.SET_NOTIF, { message: state.failedSubmission, variant: 'error' })
         reject(errorResponse)
       })
     })
@@ -298,7 +302,7 @@ const actions = {
     }, function (errorResponse) {
       commit(FORM.UPDATE_FORM_LOADING, false)
       commit(FORM.SET_FORM_ERRORS, errorResponse.response.data)
-      commit(NOTIFICATION.SET_NOTIF, { message: 'Your submission could not be validated, please fix and retry', variant: 'error' })
+      commit(NOTIFICATION.SET_NOTIF, { message: state.failedSubmission, variant: 'error' })
     })
   }
 }

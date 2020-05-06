@@ -18,7 +18,9 @@
                             :withVideoUrl="withVideoUrl"
                             :altTextMaxLength="altTextMaxLength"
                             :captionMaxLength="captionMaxLength"
-                            :extraMetadatas="extraMetadatas">
+                            :extraMetadatas="extraMetadatas"
+                            :defaultCropLabel="defaultCropLabel"
+                            :indexCropLabel="indexCropLabel">
             </a17-mediafield>
         </div>
       </transition-group>
@@ -47,13 +49,25 @@
     },
     mixins: [draggableMixin, mediaLibrayMixin, mediaFieldMixin],
     props: {
+      defaultCropLabel: {
+        type: String,
+        default: ''
+      },
+      indexCropLabel: {
+        type: String,
+        default: ''
+      },
       name: {
         type: String,
         required: true
       },
+      btnLabel: {
+        type: String,
+        default: this.$trans('fields.browser.attach', 'Attach')
+      },
       itemLabel: {
         type: String,
-        default: 'image'
+        default: this.$trans('fields.medias.images', 'images')
       },
       max: {
         type: Number,
@@ -71,8 +85,7 @@
         return Math.max(0, this.max - this.slides.length)
       },
       addLabel: function () {
-        const itemNames = this.itemLabel + 's'
-        return 'Attach ' + itemNames
+        return this.btnLabel + ' ' + this.itemLabel
       },
       slides: {
         get () {

@@ -39,6 +39,9 @@ return [
             'published' => 'Published',
             'draft' => 'Draft',
             'trash' => 'Trash',
+            'thumbnail' => 'Thumbnail',
+            'featured' => 'Featured',
+            'name' => 'Name',
         ],
         'dropdown' => [
             'edit' => 'Edit',
@@ -50,8 +53,10 @@ return [
             'destroy' => 'Destroy',
             'delete' => 'Delete',
             'duplicate' => 'Duplicate',
+            'view-permalink' => 'View permalink',
         ],
         'actions' => [
+            'bulk' => 'Bulk actions',
             'delete-item' => 'Delete item',
             'delete' => 'Delete',
             'to-trash' => 'Move to trash',
@@ -60,6 +65,10 @@ return [
             'destroy' => 'Destroy',
             'destroy-permanently' => 'Destroy permanently',
             'info-destroy' => 'The item won\'t be able to be restored anymore.',
+        ],
+        'paginate' => [
+            'rows-page' => 'Rows per page:',
+            'of' => 'of',
         ],
         'add-new-button' => 'Add new',
         'listing-empty-message' => 'There is no item here yet.',
@@ -74,6 +83,7 @@ return [
         'update' => 'Update',
         'title' => 'Title',
         'description' => 'Description',
+        'show' => 'Show',
     ],
     'modal' => [
         'title-field' => 'Title',
@@ -94,6 +104,7 @@ return [
         'logout' => 'Logout',
         'admin' => 'Admin',
         'open-live-site' => 'Open live site &#8599;',
+        'close' => 'Close',
         'close-menu' => 'Close menu',
     ],
     'module' => [
@@ -105,6 +116,7 @@ return [
         'un' => 'un',
         'published' => 'published',
         'not-published' => ' was not published. Something wrong happened!',
+        'item' => 'item',
         'items' => 'items',
         'items-not-published' => ' items were not published. Something wrong happened!',
         'duplicated-success' => ' duplicated with Success!',
@@ -123,6 +135,9 @@ return [
         'items-not-restored' => ' items were not restored. Something wrong happened!',
         'featured' => 'featured',
         'not-featured' => ' was not featured. Something wrong happened!',
+        'items-not-featured' => ' items were not featured. Something wrong happened!',
+        'order-changed' => ' order changed!',
+        'order-not-changed' => ' order was not changed. Something wrong happened!',
     ],
     'media-library' => [
         'title' => 'Media Library',
@@ -132,6 +147,7 @@ return [
         'sidebar' => [
             'empty-text' => 'No file selected',
             'files-selected' => 'files selected',
+            'selected' => 'selected',
             'clear' => 'Clear',
             'dimensions' => 'Dimensions',
         ],
@@ -152,6 +168,9 @@ return [
     'fields' => [
         'medias' => [
             'btn-label' => 'Attach image',
+            'btn-label-pl' => 'Attach images',
+            'image' => 'image',
+            'images' => 'images',
         ],
         'block-editor' => [
             'collapse-all' => 'Collapse all',
@@ -162,6 +181,7 @@ return [
             'add-content' => 'Add content',
             'preview' => 'Preview',
             'loading' => 'Loading',
+            'source-code' => 'Source code',
         ],
         'browser' => [
             'attach' => 'Attach',

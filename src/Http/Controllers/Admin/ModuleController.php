@@ -763,10 +763,10 @@ abstract class ModuleController extends Controller
             // we don't need to check if unique feature since bulk operation shouldn't be allowed in this case
             $this->repository->updateBasic($ids, [$featuredField => $featured]);
             $this->fireEvent();
-            return $this->respondWithSuccess($this->modelTitle . ' items ' . ($this->request->get('feature') ? '' : 'un') . 'featured!');
+            return $this->respondWithSuccess($this->modelTitle . twillTrans('twill::lang.module.items') . ($this->request->get('feature') ? '' : twillTrans('twill::lang.module.un')) . twillTrans('twill::lang.module.featured').'!');
         }
 
-        return $this->respondWithError($this->modelTitle . ' items were not featured. Something wrong happened!');
+        return $this->respondWithError($this->modelTitle . twillTrans('twill::lang.module.items-not-featured'));
     }
 
     /**
@@ -777,10 +777,10 @@ abstract class ModuleController extends Controller
         if (($values = $this->request->get('ids')) && !empty($values)) {
             $this->repository->setNewOrder($values);
             $this->fireEvent();
-            return $this->respondWithSuccess($this->modelTitle . ' order changed!');
+            return $this->respondWithSuccess($this->modelTitle . twillTrans('twill::lang.module.order-changed'));
         }
 
-        return $this->respondWithError($this->modelTitle . ' order was not changed. Something wrong happened!');
+        return $this->respondWithError($this->modelTitle . twillTrans('twill::lang.module.order-not-changed'));
     }
 
     /**
@@ -1003,7 +1003,7 @@ abstract class ModuleController extends Controller
         ) {
             array_push($tableColumns, [
                 'name' => 'thumbnail',
-                'label' => 'Thumbnail',
+                'label' => twillTrans('twill::lang.listing.thumbnail'),
                 'visible' => $visibleColumns ? in_array('thumbnail', $visibleColumns) : true,
                 'optional' => true,
                 'sortable' => false,
@@ -1014,7 +1014,7 @@ abstract class ModuleController extends Controller
         if ($this->getIndexOption('feature')) {
             array_push($tableColumns, [
                 'name' => 'featured',
-                'label' => 'Featured',
+                'label' => twillTrans('twill::lang.listing.featured'),
                 'visible' => true,
                 'optional' => false,
                 'sortable' => false,
@@ -1024,7 +1024,7 @@ abstract class ModuleController extends Controller
         if ($this->getIndexOption('publish')) {
             array_push($tableColumns, [
                 'name' => 'published',
-                'label' => 'Published',
+                'label' => twillTrans('twill::lang.listing.published'),
                 'visible' => true,
                 'optional' => false,
                 'sortable' => false,
@@ -1033,7 +1033,7 @@ abstract class ModuleController extends Controller
 
         array_push($tableColumns, [
             'name' => 'name',
-            'label' => $this->indexColumns[$this->titleColumnKey]['title'] ?? 'Name',
+            'label' => $this->indexColumns[$this->titleColumnKey]['title'] ?? twillTrans('twill::lang.listing.name'),
             'visible' => true,
             'optional' => false,
             'sortable' => $this->getIndexOption('reorder') ? false : ($this->indexColumns[$this->titleColumnKey]['sort'] ?? false),

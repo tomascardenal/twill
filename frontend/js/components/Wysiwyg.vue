@@ -12,7 +12,7 @@
           <textarea :placeholder="placeholder" :autofocus="autofocus" v-model="value"
                     :style="textareaHeight"></textarea>
         </div>
-        <a17-button variant="ghost" @click="toggleSourcecode" class="wysiwyg__button">Source code</a17-button>
+        <a17-button variant="ghost" @click="toggleSourcecode" class="wysiwyg__button">{{ $trans('fields.block-editor.source-code', 'Source code') }}</a17-button>
       </template>
       <template v-else>
         <div class="wysiwyg" :class="textfieldClasses">

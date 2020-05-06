@@ -13,6 +13,7 @@
     $hideCounter = $hideCounter ?? false;
     $type = $type ?? 'quill';
     $limitHeight = $limitHeight ?? false;
+    $sourceBtnLabel = $sourceBtnLabel ?? twillTrans('twill::lang.fields.block-editor.source-code');
 
     // quill.js options
     $activeSyntax = $syntax ?? false;
@@ -55,6 +56,7 @@
         <a17-locale
             type="a17-wysiwyg-tiptap"
             :attributes="{
+            sourceBtnLabel: '{{$sourceBtnLabel}}',
             label: '{{ $label }}',
             @include('twill::partials.form.utils._field_name', ['asAttributes' => true])
             @if ($note) note: '{{ $note }}', @endif

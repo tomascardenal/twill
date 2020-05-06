@@ -5,6 +5,7 @@
     $note = $note ?? 'Add' . ($max > 1 ? " up to $max $itemLabel" : ' one ' . Str::singular($itemLabel));
     $fieldNote = $fieldNote ?? '';
     $filesizeMax = $filesizeMax ?? 0;
+    $addLabelValue = $addLabelValue ?? twillTrans('twill::lang.fields.files.add-label');
 @endphp
 
 <a17-locale
@@ -13,6 +14,7 @@
         type: '{{ $type }}',
         label: '{{ $label }}',
         itemLabel: '{{ $itemLabel }}',
+        addLabelValue: '{{$addLabelValue}}',
         @include('twill::partials.form.utils._field_name', ['asAttributes' => true])
         note: '{{ $note }}',
         fieldNote: '{{ $fieldNote }}',

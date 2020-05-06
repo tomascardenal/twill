@@ -13,6 +13,10 @@
     $multiple = $max > 1 || $max == 0;
     $widthMin = $widthMin ?? 0;
     $heightMin = $heightMin ?? 0;
+    $btnLabel = $btnLabel ?? twillTrans('twill::lang.fields.medias.btn-label-pl');
+    $itemLabel = $itemLabel ?? twillTrans('twill::lang.fields.medias.image');
+    $defaultCropLabel = $defaultCropLabel ?? '';
+    $indexCropLabel = $indexCropLabel ?? '';
 @endphp
 
 @if (config('twill.media_library.translated_form_fields', $translated ?? false) && ($translated ?? true))
@@ -49,8 +53,12 @@
     <a17-inputframe label="{{ $label }}" name="medias.{{ $name }}" @if ($required) :required="true" @endif @if ($fieldNote) note="{{ $fieldNote }}" @endif>
         @if($multiple) <a17-slideshow @else <a17-mediafield @endif
             @include('twill::partials.form.utils._field_name')
+            item-label="{{$itemLabel}}"
+            btn-label="{{$btnLabel}}"
             type="{{ $type }}"
             crop-context="{{ $name }}"
+            default-crop-label="{{$defaultCropLabel}}"
+            index-crop-label="{{$indexCropLabel}}"
             :width-min="{{ $widthMin }}"
             :height-min="{{ $heightMin }}"
             @if($multiple) :max="{{ $max }}" @endif

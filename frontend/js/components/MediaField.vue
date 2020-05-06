@@ -112,6 +112,14 @@
     },
     mixins: [mediaLibrayMixin, mediaFieldMixin],
     props: {
+      defaultCropLabel: {
+        type: String,
+        default: ''
+      },
+      indexCropLabel: {
+        type: String,
+        default: ''
+      },
       name: {
         type: String,
         required: true
@@ -227,7 +235,13 @@
           for (const variant in this.media.crops) {
             if (this.media.crops[variant].width + this.media.crops[variant].height) { // crop is not 0x0
               let cropInfo = ''
-              cropInfo += this.media.crops[variant].name + ' crop: '
+              if ((this.media.crops[variant].name === 'Default' || this.media.crops[variant].name === 'default') && this.defaultCropLabel !== '') {
+                cropInfo += this.defaultCropLabel + ' '
+              } else if ((this.media.crops[variant].name === 'Index' || this.media.crops[variant].name === 'index') && this.indexCropLabel !== '') {
+                cropInfo += this.indexCropLabel + ' '
+              } else {
+                cropInfo += this.media.crops[variant].name + ' crop: '
+              }
               cropInfo += this.media.crops[variant].width + '&nbsp;&times;&nbsp;' + this.media.crops[variant].height
               cropInfos.push(cropInfo)
             }

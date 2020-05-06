@@ -8,7 +8,7 @@
           <div class="datatable__stickyInner">
             <div class="datatable__setup">
               <a17-dropdown class="datatable__setupDropdown" v-if="hideableColumns.length" ref="setupDropdown"
-                            position="bottom-right" title="Show" :clickable="true" :offset="-10">
+                            position="bottom-right" title="{{ $trans('main.show', 'Show') }}" :clickable="true" :offset="-10">
                 <button class="datatable__setupButton" @click="$refs.setupDropdown.toggle()">
                   <span v-svg symbol="preferences"></span></button>
                 <div slot="dropdown__content">
@@ -61,7 +61,7 @@
                       @changePage="updatePage" @changeOffset="updateOffset"/>
       </div>
     </div>
-    <a17-spinner v-if="loading">Loading&hellip;</a17-spinner>
+    <a17-spinner v-if="loading">{{ $trans('fields.block-editor.loading', 'Loading&hellip;') }}</a17-spinner>
   </div>
 </template>
 

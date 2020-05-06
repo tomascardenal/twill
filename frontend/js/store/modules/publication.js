@@ -12,7 +12,7 @@ const state = {
   visibility: window[process.env.VUE_APP_NAME].STORE.publication.visibility || false,
   reviewProcess: window[process.env.VUE_APP_NAME].STORE.publication.reviewProcess || [],
   saveType: undefined,
-  visibilityOptions: [
+  visibilityOptions: window.STORE.publication.visibilityOptions || [
     {
       value: 'public',
       label: 'Public'

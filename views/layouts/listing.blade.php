@@ -9,6 +9,7 @@
     $nested = $nested ?? false;
     $bulkEdit = $bulkEdit ?? true;
     $create = $create ?? false;
+    $searchPlaceholder = twillTrans('twill::lang.filter.search-placeholder');
 
     $requestFilter = json_decode(request()->get('filter'), true) ?? [];
 @endphp
@@ -32,7 +33,7 @@
     <div class="listing">
         <div class="listing__nav">
             <div class="container" ref="form">
-                <a17-filter v-on:submit="filterListing" v-bind:closed="hasBulkIds"
+                <a17-filter v-on:submit="filterListing" v-bind:closed="hasBulkIds" placeholder="{{$searchPlaceholder}}"
                             initial-search-value="{{ $filters['search'] ?? '' }}" :clear-option="true"
                             v-on:clear="clearFiltersAndReloadDatas">
                     <a17-table-filters slot="navigation"></a17-table-filters>
