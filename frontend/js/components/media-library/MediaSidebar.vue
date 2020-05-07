@@ -12,7 +12,7 @@
           <img v-if="isImage" :src="firstMedia.thumbnail" class="mediasidebar__img" :alt="firstMedia.original"/>
           <p class="mediasidebar__name">{{ firstMedia.name }}</p>
           <ul class="mediasidebar__metadatas">
-            <li class="f--small" v-if="firstMedia.size" >File size: {{ firstMedia.size | uppercase }}</li>
+            <li class="f--small" v-if="firstMedia.size" >{{ $trans('media-library.sidebar.file-size', 'File size:') }} {{ firstMedia.size | uppercase }}</li>
             <li class="f--small" v-if="isImage && (firstMedia.width + firstMedia.height)">
               {{ $trans('media-library.sidebar.dimensions', 'Dimensions') }}: {{ firstMedia.width }} &times; {{ firstMedia.height }}
             </li>
@@ -32,16 +32,16 @@
 
       <form v-if="hasMedia" ref="form" class="mediasidebar__inner mediasidebar__form" @submit="submit">
         <span class="mediasidebar__loader" v-if="loading"><span class="loader loader--small"><span></span></span></span>
-        <a17-vselect v-if="!fieldsRemovedFromBulkEditing.includes('tags')" label="Tags"
+        <a17-vselect v-if="!fieldsRemovedFromBulkEditing.includes('tags')" label="{{ $trans('media-library.sidebar.tags', 'Tags') }}"
                      :key="firstMedia.id + '-' + medias.length" name="tags" :multiple="true"
                      :selected="hasMultipleMedias ? sharedTags : firstMedia.tags" :searchable="true"
-                     emptyText="Sorry, no tags found." :taggable="true" :pushTags="true" size="small"
+                     emptyText="{{ $trans('media-library.sidebar.no-tags', 'Sorry, no tags found.') }}" :taggable="true" :pushTags="true" size="small"
                      :endpoint="type.tagsEndpoint" @change="save" maxHeight="175px"/>
         <span
           v-if="extraMetadatas.length && isImage && hasMultipleMedias && !fieldsRemovedFromBulkEditing.includes('tags')"
           class="f--tiny f--note f--underlined" @click="removeFieldFromBulkEditing('tags')"
           data-tooltip-title="Remove this field if you do not want to update it on all selected medias"
-          data-tooltip-theme="default" data-tooltip-placement="top" v-tooltip>Remove from bulk edit</span>
+          data-tooltip-theme="default" data-tooltip-placement="top" v-tooltip>{{ $trans('media-library.sidebar.bulk-edit', 'Remove from bulk edit') }}</span>
         <template v-if="hasMultipleMedias">
           <input type="hidden" name="ids" :value="mediasIds"/>
         </template>
@@ -99,18 +99,18 @@
                 v-if="isImage && hasMultipleMedias && !fieldsRemovedFromBulkEditing.includes(field.name)"
                 v-bind:key="field.name"
                 data-tooltip-title="Remove this field if you do not want to update it on all selected medias"
-                data-tooltip-theme="default" data-tooltip-placement="top" v-tooltip>Remove from bulk edit</span>
+                data-tooltip-theme="default" data-tooltip-placement="top" v-tooltip>{{ $trans('media-library.sidebar.bulk-edit', 'Remove from bulk edit') }}</span>
         </template>
       </form>
     </template>
 
     <a17-modal class="modal--tiny modal--form modal--withintro" ref="warningDelete" title="Warning Delete">
-      <p class="modal--tiny-title"><strong>Are you sure ?</strong></p>
+      <p class="modal--tiny-title"><strong>{{ $trans('media-library.sidebar.are-you-sure', 'Are you sure ?') }}</strong></p>
       <p>{{ warningDeleteMessage }}</p>
       <a17-inputframe>
-        <a17-button variant="validate" @click="deleteSelectedMedias">Delete ({{ mediasIdsToDelete.length }})
+        <a17-button variant="validate" @click="deleteSelectedMedias">{{ $trans('listing.actions.delete', 'Delete') }} ({{ mediasIdsToDelete.length }})
         </a17-button>
-        <a17-button variant="aslink" @click="$refs.warningDelete.close()"><span>Cancel</span></a17-button>
+        <a17-button variant="aslink" @click="$refs.warningDelete.close()"><span>{{ $trans('publisher.cancel', 'Cancel') }}</span></a17-button>
       </a17-inputframe>
     </a17-modal>
   </div>

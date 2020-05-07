@@ -150,6 +150,11 @@ return [
             'selected' => 'selected',
             'clear' => 'Clear',
             'dimensions' => 'Dimensions',
+            'file-size' => 'File size:',
+            'tags' => 'Tags',
+            'no-tags' => 'Sorry, no tags found.',
+            'bulk-edit' => 'Remove from bulk edit',
+            'are-you-sure' => 'Are you sure ?',
         ],
     ],
     'filter' => [
