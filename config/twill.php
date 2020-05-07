@@ -116,7 +116,7 @@ return [
     | use regular integers for backwards compatiblity.
     |
      */
-    'migrations_use_big_integers' => true,
+    'migrations_use_big_integers' => false,
     /*
     |
     | Since Twill 2.0, migrations are not published anymore but loaded
