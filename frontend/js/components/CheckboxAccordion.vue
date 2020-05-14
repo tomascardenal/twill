@@ -45,7 +45,7 @@
     },
     computed: {
       currentLabel: function () {
-        return this.currentValue.length + ' ' +this.$trans('main.published', 'Live')
+        return this.currentValue.length + ' ' + this.$trans('main.published', 'Live')
       }
     },
     methods: {
